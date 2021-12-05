@@ -10,6 +10,7 @@ public class ErrorDTO {
     @Getter
     @Setter
     private String property;
+
     @Getter
     @Setter
     private String message;

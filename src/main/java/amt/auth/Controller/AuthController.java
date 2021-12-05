@@ -21,24 +21,22 @@ public class AuthController {
     /**
      * Endpoint de création de compte
      * @param credentialDTO crédential du nouvel utilisateur
-     * @return
+     * @return ResponseEntity<AccountDTO>
      */
     @PostMapping(value = "/account/register")
     public ResponseEntity<AccountDTO> signup(@Validated @RequestBody CredentialDTO credentialDTO) {
 
         return ResponseEntity.ok(authService.signup(credentialDTO));
-
     }
 
     /**
      * Endpoint de connexion à un compte existant
      * @param credentialDTO credential de l'utilisateur
-     * @return
+     * @return ResponseEntity<TokenDTO>
      */
     @PostMapping(value = "/auth/login")
     public ResponseEntity<TokenDTO> signin(@RequestBody CredentialDTO credentialDTO) {
 
         return ResponseEntity.ok(authService.signin(credentialDTO));
-
     }
 }
