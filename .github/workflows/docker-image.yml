@@ -13,8 +13,12 @@ jobs:
     - name: package jar file
       run: mvn docker:start package -DDB_PASSWORD=root -DJWT_SECRET=secret docker:stop
       
-    - name: display files
-      run: ls
       
-    #- name: Build the Docker image
-    # run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: Build the Docker image
+      run: docker build . -t amtsilkyroad/auth
+      
+    - name: Login to dockerhub
+      run: docker login -u amtsilkyroad -p uvAwKKdtARa6ST3
+      
+    - name: Push image to dockerhub
+      run: docker push amtsilkyroad/auth
