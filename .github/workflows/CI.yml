@@ -19,4 +19,4 @@ jobs:
         distribution: 'adopt'
         cache: maven
     - name: Test with maven
-      run: docker:start test -DDB_PASSWORD=root -DJWT_SECRET=secret docker:stop
+      run: mvn docker:start test -DDB_PASSWORD=root -DJWT_SECRET=secret docker:stop
