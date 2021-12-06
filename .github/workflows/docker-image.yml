@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image CD
 
 on: [workflow_dispatch]
 
@@ -10,5 +10,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: package jar file
+      run: mvn docker:start package -DDB_PASSWORD=root -DJWT_SECRET=secret docker:stop
+      
+      
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build -t amtsilkyroad/auth .
+      
+    - name: Login to dockerhub
+      run: docker login -u amtsilkyroad -p uvAwKKdtARa6ST3
+      
+    - name: Push image to dockerhub
+      run: docker push amtsilkyroad/auth
