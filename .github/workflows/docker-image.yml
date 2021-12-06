@@ -15,7 +15,7 @@ jobs:
       
       
     - name: Build the Docker image
-      run: docker build . -t amtsilkyroad/auth
+      run: docker build -t amtsilkyroad/auth .
       
     - name: Login to dockerhub
       run: docker login -u amtsilkyroad -p uvAwKKdtARa6ST3
