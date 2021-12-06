@@ -1,4 +1,4 @@
-name: Docker Image CD
+name: Deploy image to dockerhub
 
 on: [workflow_dispatch]
 
