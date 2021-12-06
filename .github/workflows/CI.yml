@@ -3,7 +3,7 @@
 
 name: Java CI with Maven
 
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   test:
@@ -19,4 +19,4 @@ jobs:
         distribution: 'adopt'
         cache: maven
     - name: Test with maven
-      run: mvn test -DDB_PASSWORD=password 
+      run: mvn test -DDB_PASSWORD=password -DJWT_SECRET=secret
