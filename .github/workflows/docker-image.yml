@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image CD
 
 on: [workflow_dispatch]
 
@@ -10,5 +10,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: package jar file
+      run: mvn docker:start package -DDB_PASSWORD=root -DJWT_SECRET=secret docker:stop
+      
+    - name: display files
+      run: ls
+      
+    #- name: Build the Docker image
+    # run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
