@@ -6,6 +6,8 @@ import amt.auth.DTO.TokenDTO;
 import amt.auth.Model.User;
 import amt.auth.Model.UserRepository;
 import amt.auth.Util.JWTUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,13 +21,19 @@ import java.nio.charset.StandardCharsets;
 public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    private final String jwtSecret;
+    private final Integer duration;
 
-    public AuthService(UserRepository userRepository) {
+    @Autowired
+    public AuthService(UserRepository userRepository, @Value("${com.example.amt_demo.config.jwt.secret}") String jwtSecret, @Value("${com.example.amt_demo.config.jwt.duration}") String duration) {
         this.userRepository = userRepository;
+        this.jwtSecret = jwtSecret;
+        this.duration = Integer.parseInt(duration);
     }
 
     /**
      * Methode de login retournant un TokenDTO si l'utilisateur est valide.
+     *
      * @param credential de l'utilisateur
      * @return TokenDTO contenant les info de l'utilisateur ainsi que le JWT
      */
@@ -44,11 +52,12 @@ public class AuthService {
                     "".getBytes(StandardCharsets.UTF_8),
                     null);
         }
-        return new TokenDTO(JWTUtils.generateJWT(user), new AccountDTO(user));
+        return new TokenDTO(JWTUtils.generateJWT(user, jwtSecret, duration), new AccountDTO(user));
     }
 
     /**
      * Méthode de création d'un compte
+     *
      * @param credentialDTO du nouvel utilisateur
      * @return AccountDTO
      */
