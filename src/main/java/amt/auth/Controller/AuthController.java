@@ -23,7 +23,7 @@ public class AuthController {
      * @param credentialDTO crédential du nouvel utilisateur
      * @return ResponseEntity<AccountDTO>
      */
-    @PostMapping(value = "/account/register")
+    @PostMapping(value = "/accounts/register")
     public ResponseEntity<AccountDTO> signup(@Validated @RequestBody CredentialDTO credentialDTO) {
 
         return ResponseEntity.ok(authService.signup(credentialDTO));
