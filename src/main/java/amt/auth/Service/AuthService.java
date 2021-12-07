@@ -34,7 +34,7 @@ public class AuthService {
         passwordEncoder.encode(credential.getPassword());
         System.out.println(user);
         System.out.println(passwordEncoder.encode(credential.getPassword()));
-        System.out.println(credential);
+        System.out.println(user.getPassword());
 
         // If the password doesn't match
         if (user == null || !passwordEncoder.matches(credential.getPassword(), user.getPassword())) {
