@@ -12,13 +12,12 @@ jobs:
     - uses: actions/checkout@v2
     - name: package jar file
       run: mvn docker:start package -DDB_PASSWORD=root -DJWT_SECRET=secret docker:stop
-      
-      
+
     - name: Build the Docker image
       run: docker build -t amtsilkyroad/auth .
       
     - name: Login to dockerhub
-      run: docker login -u amtsilkyroad -p uvAwKKdtARa6ST3
+      run: docker login -u  ${{ secrets.DOCKER_LOGIN_NAME }} -p  ${{ secrets.DOCKER_LOGIN_PASSWORD }}
       
     - name: Push image to dockerhub
       run: docker push amtsilkyroad/auth
