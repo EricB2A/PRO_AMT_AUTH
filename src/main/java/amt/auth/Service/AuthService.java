@@ -32,9 +32,6 @@ public class AuthService {
     public TokenDTO signin(CredentialDTO credential) {
         User user = userRepository.findByUsername(credential.getUsername());
         passwordEncoder.encode(credential.getPassword());
-        System.out.println(user);
-        System.out.println(passwordEncoder.encode(credential.getPassword()));
-        System.out.println(credential);
 
         // If the password doesn't match
         if (user == null || !passwordEncoder.matches(credential.getPassword(), user.getPassword())) {

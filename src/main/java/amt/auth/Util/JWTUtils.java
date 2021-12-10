@@ -13,6 +13,7 @@ public class JWTUtils {
     public static String generateJWT(User user) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", user.getRole());
+        claims.put("id", user.getId());
 
         return Jwts.builder().setClaims(claims).setSubject(user.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
