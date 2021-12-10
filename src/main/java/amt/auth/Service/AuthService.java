@@ -6,6 +6,7 @@ import amt.auth.DTO.TokenDTO;
 import amt.auth.Model.User;
 import amt.auth.Model.UserRepository;
 import amt.auth.Util.JWTUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,10 +19,12 @@ import java.nio.charset.StandardCharsets;
 @Service
 public class AuthService {
     private final UserRepository userRepository;
+    private final String secret;
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public AuthService(UserRepository userRepository) {
+    public AuthService(UserRepository userRepository, @Value("${com.example.amt_demo.config.jwt.secret}") String secret) {
         this.userRepository = userRepository;
+        this.secret = secret;
     }
 
     /**
@@ -41,7 +44,7 @@ public class AuthService {
                     "".getBytes(StandardCharsets.UTF_8),
                     null);
         }
-        return new TokenDTO(JWTUtils.generateJWT(user), new AccountDTO(user));
+        return new TokenDTO(JWTUtils.generateJWT(user, secret), new AccountDTO(user));
     }
 
     /**

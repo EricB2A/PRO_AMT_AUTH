@@ -14,6 +14,7 @@ import amt.auth.Model.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,10 +27,11 @@ public class Seeder implements CommandLineRunner {
     final private Logger logger;
     final private UserRepository userRepository;
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
+    private final String password;
     @Autowired
-    public Seeder(UserRepository userRepository) {
+    public Seeder(UserRepository userRepository, @Value("${com.example.amt_demo.config.admin.password}") String password) {
         this.userRepository = userRepository;
+        this.password = password;
         logger = LoggerFactory.getLogger(Seeder.class);
     }
 
@@ -49,7 +51,7 @@ public class Seeder implements CommandLineRunner {
     public void createAdmin() {
         logger.debug("Init data...");
         if(userRepository.findByUsername("silkyroad") == null){
-            userRepository.save(new User("silkyroad", passwordEncoder.encode("kvmIrjw!81]nBhgwrsqr"), "admin"));
+            userRepository.save(new User("silkyroad", passwordEncoder.encode(password), "admin"));
         }
         logger.debug("Init data done ! ...");
     }
