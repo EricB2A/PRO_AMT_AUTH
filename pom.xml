@@ -121,6 +121,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.6.1</version>
 			</plugin>
             <plugin>
                 <groupId>io.fabric8</groupId>
@@ -155,7 +156,7 @@
                                     <MYSQL_ROOT_PASSWORD>root</MYSQL_ROOT_PASSWORD>
                                 </env>
                                 <ports>
-                                    <port>3306:3306</port>
+                                    <port>3307:3306</port>
                                 </ports>
                                 <wait>
                                     <time>10000</time>
