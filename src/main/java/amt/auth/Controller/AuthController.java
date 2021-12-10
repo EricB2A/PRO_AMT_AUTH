@@ -4,6 +4,8 @@ import amt.auth.DTO.AccountDTO;
 import amt.auth.DTO.TokenDTO;
 import amt.auth.Service.AuthService;
 import amt.auth.DTO.CredentialDTO;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +28,7 @@ public class AuthController {
     @PostMapping(value = "/accounts/register")
     public ResponseEntity<AccountDTO> signup(@Validated @RequestBody CredentialDTO credentialDTO) {
 
-        return ResponseEntity.ok(authService.signup(credentialDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(authService.signup(credentialDTO));
     }
 
     /**
