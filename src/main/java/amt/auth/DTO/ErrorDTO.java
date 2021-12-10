@@ -1,7 +1,6 @@
 package amt.auth.DTO;
 
 import lombok.AllArgsConstructor;
-import lombok.Generated;
 import lombok.Getter;
 import lombok.Setter;
 
