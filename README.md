@@ -3,6 +3,7 @@ AMT AUTH est un service permettant l'authentification d'utilisateurs de l'applic
 
 ## Architecture logicielle 🏛
 ![schema](docs/pro_auth.drawio.png)
+
 Le service d'authenfication est packagé dans un container docker qui est hébergé sur [Docker Hub](https://hub.docker.com/).
 
 Un déploiement se fait en 2 étapes : 
