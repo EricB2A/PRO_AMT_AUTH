@@ -16,6 +16,7 @@ public class CredentialDTO {
     @Getter
     @Setter
     @NotNull
+    // DPE - Les annotations sont très utiles, mais on mélange une "logique" métier dans une DTO. Et ce n'est pas le but du pattern
     @Size(min = 5,message = "Le nom d'utilisateur doit être composé d'au moins 5 caractères")
     private String username;
     @Getter

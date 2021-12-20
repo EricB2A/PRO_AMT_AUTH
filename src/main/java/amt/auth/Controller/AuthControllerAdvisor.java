@@ -28,6 +28,7 @@ public class AuthControllerAdvisor {
      * @param request WebRequest
      * @return ResponseEntity
      */
+    // DPE - Est-ce que vous pensez que valider votre objet pas hibernate est une bonne idée ?
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Object> handleBadParameters(
             MethodArgumentNotValidException exception, WebRequest request) {
@@ -48,9 +49,13 @@ public class AuthControllerAdvisor {
      * @param request WebRequest
      * @return ResponseEntity
      */
+
+    // DPE - +ue va-t-il se passer si l'application grandie et que vous avez d'autres services/Repositories qui lancent une DataIntegrityViolationException ?
+    // Est-ce que le message d'erreur sera encore valide dans le context ?
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<Object> handleUsernameAlreadyExists(
             DataIntegrityViolationException  exception, WebRequest request) {
+        // DPE - Du coup pourquoi ne pas faire comme la fonction d'en dessous ? exception.getStatusText()
         return new ResponseEntity<>(new BasicErrorDTO("Le nom d'utilisateur est déjà utilisé"), HttpStatus.CONFLICT);
     }
 

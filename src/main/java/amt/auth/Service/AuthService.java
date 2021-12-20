@@ -37,6 +37,8 @@ public class AuthService {
         passwordEncoder.encode(credential.getPassword());
 
         // If the password doesn't match
+        // DPE - Lancer une exception http au niveau du service casse un peu la séparation en layer de l'application.
+        // Je lancerais une exception "custom" et pour la catcher dans le controller, et ça serait la tâche du controlleur de lancer l'exception http
         if (user == null || !passwordEncoder.matches(credential.getPassword(), user.getPassword())) {
             throw HttpClientErrorException.create(HttpStatus.FORBIDDEN,
                     "Les informations de connexion fournies sont incorrectes",
