@@ -5,12 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @AllArgsConstructor
+@Getter
+@Setter
 public class ErrorDTO {
-    @Getter
-    @Setter
     private String property;
-
-    @Getter
-    @Setter
     private String message;
 }

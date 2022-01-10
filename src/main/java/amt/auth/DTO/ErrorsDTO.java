@@ -6,9 +6,9 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 public class ErrorsDTO {
-    @Getter
-    @Setter
     private List<ErrorDTO> errors;
     public ErrorsDTO(){
         errors = new ArrayList<>();

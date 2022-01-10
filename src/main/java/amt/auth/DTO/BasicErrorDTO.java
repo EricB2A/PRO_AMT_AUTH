@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @AllArgsConstructor
+@Getter
+@Setter
 public class BasicErrorDTO {
-    @Getter
-    @Setter
     private String error;
 }
