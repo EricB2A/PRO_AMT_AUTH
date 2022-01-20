@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
-public class AuthController {
+public class    AuthController {
     private final AuthService authService;
 
     public AuthController(AuthService authService) {
@@ -26,7 +28,7 @@ public class AuthController {
      * @return ResponseEntity<AccountDTO>
      */
     @PostMapping(value = "/accounts/register")
-    public ResponseEntity<AccountDTO> signup(@Validated @RequestBody CredentialDTO credentialDTO) {
+    public ResponseEntity<AccountDTO> signup(@RequestBody CredentialDTO credentialDTO) {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(authService.signup(credentialDTO));
     }

@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @AllArgsConstructor
-//DPE - Les annotations ici ? non ? :P
 @Getter
 @Setter
 public class AccountDTO {

@@ -52,11 +52,11 @@ public class AuthControllerAdvisor {
 
     // DPE - +ue va-t-il se passer si l'application grandie et que vous avez d'autres services/Repositories qui lancent une DataIntegrityViolationException ?
     // Est-ce que le message d'erreur sera encore valide dans le context ?
-    @ExceptionHandler(DataIntegrityViolationException.class)
+    @ExceptionHandler(UserAlreadyExistException.class)
     public ResponseEntity<Object> handleUsernameAlreadyExists(
-            DataIntegrityViolationException  exception, WebRequest request) {
+            UserAlreadyExistException  exception, WebRequest request) {
         // DPE - Du coup pourquoi ne pas faire comme la fonction d'en dessous ? exception.getStatusText()
-        return new ResponseEntity<>(new BasicErrorDTO("Le nom d'utilisateur est déjà utilisé"), HttpStatus.CONFLICT);
+        return new ResponseEntity<>(new BasicErrorDTO(exception.getMessage()), HttpStatus.CONFLICT);
     }
 
     /**
