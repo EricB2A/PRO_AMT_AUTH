@@ -20,9 +20,10 @@ import javax.validation.constraints.Size;
 
 @Entity
 @NoArgsConstructor
+@RequiredArgsConstructor
 @ToString
 @Getter
-public class User extends ValidatedModel {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -39,9 +40,6 @@ public class User extends ValidatedModel {
     @Column
     @NotBlank
     @Setter
+    @NonNull
     private String role;
-
-    public User(String username, String password, String role){
-        validateOrThrow();
-    }
 }

@@ -3,6 +3,7 @@ package amt.auth.Controller;
 import amt.auth.DTO.BasicErrorDTO;
 import amt.auth.DTO.ErrorDTO;
 import amt.auth.DTO.ErrorsDTO;
+import amt.auth.Exception.UserAlreadyExistException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
