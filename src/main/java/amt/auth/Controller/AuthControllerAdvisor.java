@@ -4,16 +4,15 @@ import amt.auth.DTO.BasicErrorDTO;
 import amt.auth.DTO.ErrorDTO;
 import amt.auth.DTO.ErrorsDTO;
 import amt.auth.Exception.UserAlreadyExistException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.context.request.WebRequest;
+
+import javax.validation.ConstraintViolationException;
 
 
 /**
@@ -29,16 +28,13 @@ public class AuthControllerAdvisor {
      * @param request WebRequest
      * @return ResponseEntity
      */
-    // DPE - Est-ce que vous pensez que valider votre objet pas hibernate est une bonne idée ?
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<Object> handleBadParameters(
-            MethodArgumentNotValidException exception, WebRequest request) {
+            ConstraintViolationException exception, WebRequest request) {
 
         ErrorsDTO errors = new ErrorsDTO();
-        exception.getBindingResult().getAllErrors()
-                .stream().filter(FieldError.class::isInstance)
-                .map(FieldError.class::cast)
-                .forEach(err -> errors.add(new ErrorDTO(err.getField(), err.getDefaultMessage())));
+        exception.getConstraintViolations()
+                .forEach(violation -> errors.add(new ErrorDTO(violation.getPropertyPath().toString(), violation.getMessage())));
 
         return new ResponseEntity<>(errors, HttpStatus.UNPROCESSABLE_ENTITY);
     }
@@ -51,12 +47,10 @@ public class AuthControllerAdvisor {
      * @return ResponseEntity
      */
 
-    // DPE - +ue va-t-il se passer si l'application grandie et que vous avez d'autres services/Repositories qui lancent une DataIntegrityViolationException ?
     // Est-ce que le message d'erreur sera encore valide dans le context ?
     @ExceptionHandler(UserAlreadyExistException.class)
     public ResponseEntity<Object> handleUsernameAlreadyExists(
             UserAlreadyExistException  exception, WebRequest request) {
-        // DPE - Du coup pourquoi ne pas faire comme la fonction d'en dessous ? exception.getStatusText()
         return new ResponseEntity<>(new BasicErrorDTO(exception.getMessage()), HttpStatus.CONFLICT);
     }
 

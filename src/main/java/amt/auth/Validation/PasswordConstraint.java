@@ -16,8 +16,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PasswordConstraint {
     String message() default "Le mot de passe doit contenir 8 caractères, doit être alphanumérique " +
-            "avec au minimum dont 1 caractère spécial, 1 caractère majuscule, 1 caractère minuscule. " +
-            "Il est également important d'avoir sacrifié un mouton de laine blanche et  grise ou  noir et grise mais surtout pas blanche et noir ah ça non.";
+            "avec au minimum dont 1 caractère spécial, 1 caractère majuscule, 1 caractère minuscule. J'ai peut être oublié quelque chose ... je vous laisse deviner quoi";
 
     Class<?>[] groups() default {};
 
