@@ -14,11 +14,10 @@ public class JWTUtils {
         Map<String, Object> claims = new HashMap<>();
         claims.put("role", user.getRole());
         claims.put("id", user.getId());
-
         return Jwts.builder().setClaims(claims).setSubject(user.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 3600 * 24 * 1000))
-                .signWith(SignatureAlgorithm.HS512, secret).compact();
+                .signWith(SignatureAlgorithm.HS512, secret.getBytes()).compact();
     }
 }
 
