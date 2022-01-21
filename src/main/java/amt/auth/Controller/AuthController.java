@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 public class  AuthController {
     private final AuthService authService;
@@ -27,7 +26,6 @@ public class  AuthController {
      */
     @PostMapping(value = "/accounts/register")
     public ResponseEntity<AccountDTO> signup(@RequestBody CredentialDTO credentialDTO) {
-
         return ResponseEntity.status(HttpStatus.CREATED).body(authService.signup(credentialDTO));
     }
 

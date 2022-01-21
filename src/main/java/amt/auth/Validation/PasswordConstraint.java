@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 
 @Documented
 @Constraint(validatedBy = PasswordValidator.class)
-@Target({ElementType.METHOD, ElementType.FIELD})
+@Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PasswordConstraint {
     String message() default "Le mot de passe doit contenir 8 caractères, doit être alphanumérique " +
