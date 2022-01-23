@@ -51,7 +51,7 @@ public class Seeder implements CommandLineRunner {
     public void createAdmin() {
         logger.debug("Init data...");
         if(userRepository.findByUsername("silkyroad") == null){
-            userRepository.save(new User("silkyroad", passwordEncoder.encode(password), "admin"));
+            userRepository.save(new User("silkyroad", password, "admin"));
         }
         logger.debug("Init data done ! ...");
     }
