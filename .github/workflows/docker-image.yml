@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: package jar file
-      run: mvn docker:start package -DAPP_ADMIN_PASSWORD=something -DDB_PASSWORD=root -DJWT_SECRET=secret docker:stop
+      run: mvn docker:start package -DAPP_ADMIN_PASSWORD=Password1? -DDB_PASSWORD=root -DJWT_SECRET=secret docker:stop
 
     - name: Build the Docker image
       run: docker build -t amtsilkyroad/auth .
